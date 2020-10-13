@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.success</groupId>
+  <artifactId>arch_study</artifactId>
+  <version>1.1-SNAPSHOT</version>
+  <modules>
+    <module>arch_core</module>
+    <module>arch_manager</module>
+      <module>arch_timer</module>
+      <module>arch_quartz</module>
+  </modules>
+  <packaging>pom</packaging>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <spring.version>5.2.1.RELEASE</spring.version>
+    <springboot.version>2.2.1.RELEASE</springboot.version>
+    <mybatis.version>3.5.2</mybatis.version>
+    <druid.version>1.1.20</druid.version>
+    <mysql.version>5.1.47</mysql.version>
+    <javaee-api.version>8.0</javaee-api.version>
+    <slf4j.version>1.7.7</slf4j.version>
+    <zookeeper.version>3.4.7</zookeeper.version>
+    <curator.version>2.10.0</curator.version>
+    <lombok.version>1.18.10</lombok.version>
+    <commons-lang3.version>3.1</commons-lang3.version>
+    <mybatis-starter.version>2.1.0</mybatis-starter.version>
+    <tomcat.embed.version>9.0.27</tomcat.embed.version>
+    <fastjson.version>1.2.70</fastjson.version>
+    <redis.version>2.2.0.RELEASE</redis.version>
+    <jedis.version>3.1.0</jedis.version>
+    <spring-amqp.version>2.2.1.RELEASE</spring-amqp.version>
+    <logback.version>1.2.3</logback.version>
+    <logback-spring.version>0.1.5</logback-spring.version>
+    <rooster.version>0.0.3</rooster.version>
+    <quartz.version>2.3.0</quartz.version>
+  </properties>
+
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>${springboot.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
+        <version>${springboot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+        <version>${springboot.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid.version}</version>
+
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>${mybatis-starter.version}</version>
+      </dependency>
+      <!-- spring核心包 -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <!--dataSource-->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>${javaee-api.version}</version>
+        <scope>compile</scope>
+      </dependency>
+
+
+      <!-- log start -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <!-- log end -->
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-recipes</artifactId>
+        <version>${curator.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-framework</artifactId>
+        <version>${curator.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-client</artifactId>
+        <version>${curator.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.zookeeper</groupId>
+        <artifactId>zookeeper</artifactId>
+        <version>${zookeeper.version}</version>
+        <type>pom</type>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!--引入了Spring Boot默认的HTTP引擎Tomcat-->
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <version>${tomcat.embed.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- servlet依赖的jar包start -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>javax.servlet.jsp-api</artifactId>
+        <version>2.3.1</version>
+      </dependency>
+
+      <!--jstl标签依赖的jar包start -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-redis</artifactId>
+        <version>${redis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>${jedis.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.amqp</groupId>
+        <artifactId>spring-amqp</artifactId>
+        <version>${spring-amqp.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.amqp</groupId>
+        <artifactId>spring-rabbit</artifactId>
+        <version>${spring-amqp.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.logback-extensions</groupId>
+        <artifactId>logback-ext-spring</artifactId>
+        <version>${logback-spring.version}</version>
+      </dependency>
+
+      <!--定时任务-->
+
+      <dependency>
+        <groupId>cn.fetosoft</groupId>
+        <artifactId>rooster-spring-boot-starter</artifactId>
+        <version>${rooster.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-pool2</artifactId>
+        <version>2.4.3</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.3</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+
+
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

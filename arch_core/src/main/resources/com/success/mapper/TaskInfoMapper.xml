@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.success.mapper.TaskInfoMapper">
+  <resultMap id="BaseResultMap" type="com.success.bean.TaskInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="expression" jdbcType="VARCHAR" property="expression" />
+    <result column="jobClass" jdbcType="VARCHAR" property="jobclass" />
+    <result column="clusterIP" jdbcType="VARCHAR" property="clusterip" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="stop_time" jdbcType="TIMESTAMP" property="stopTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, code, name, description, expression, jobClass, clusterIP, params, status, create_time, 
+    start_time, stop_time
+  </sql>
+
+  <sql id="queryConditions">
+    <where>
+      <if test="code != null and code!=''">
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null and name!=''">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="clusterip != null and clusterip!=''">
+        and clusterIP = #{clusterip,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectListByForm" parameterType="com.success.form.TaskInfoForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task_info
+    <include refid="queryConditions" />
+    <include refid="base.orderAndPage" />
+  </select>
+
+  <select id="selectCountByForm" parameterType="com.success.form.TaskInfoForm" resultType="java.lang.Integer">
+    select count(*) as c
+    from task_info
+    <include refid="queryConditions" />
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.success.bean.TaskInfo">
+    insert into task_info (code, name,
+      description, expression, jobClass, 
+      clusterIP, params, status, 
+      create_time, start_time, stop_time
+      )
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{expression,jdbcType=VARCHAR}, #{jobclass,jdbcType=VARCHAR}, 
+      #{clusterip,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{stopTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.success.bean.TaskInfo">
+    update task_info
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null">
+        expression = #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclass != null">
+        jobClass = #{jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterip != null">
+        clusterIP = #{clusterip,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateTaskStatus" parameterType="com.success.bean.TaskInfo">
+    update task_info
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+</mapper>

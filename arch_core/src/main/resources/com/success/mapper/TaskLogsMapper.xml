@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.success.mapper.TaskLogsMapper">
+  <resultMap id="BaseResultMap" type="com.success.bean.TaskLogs">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="expression" jdbcType="VARCHAR" property="expression" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="exec_time" jdbcType="BIGINT" property="execTime" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="error_msg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, code, name, type, expression, start_time, end_time, exec_time, host, status, error_msg,
+    remark, create_time
+  </sql>
+
+  <sql id="queryConditions">
+    <where>
+      <if test="code != null and code!=''">
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null and type!=''">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="startCreateTime != null and startCreateTime!=''">
+        and create_time >= #{startCreateTime,jdbcType=VARCHAR}
+      </if>
+      <if test="endCreateTime != null and endCreateTime!=''">
+        <![CDATA[ and create_time <= #{endCreateTime,jdbcType=VARCHAR}  ]]>
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task_logs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectListByForm" parameterType="com.success.form.TaskLogsForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task_logs
+    <include refid="queryConditions" />
+    <include refid="base.orderAndPage" />
+  </select>
+
+  <select id="selectCountByForm" parameterType="com.success.form.TaskLogsForm" resultType="java.lang.Integer">
+    select count(*) as c
+    from task_logs
+    <include refid="queryConditions" />
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from task_logs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.success.bean.TaskLogs">
+    insert into task_logs (code, name,
+      expression, type, start_time, end_time,
+      exec_time, host, status, 
+      error_msg, remark, create_time
+      )
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{expression,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+      #{execTime,jdbcType=BIGINT}, #{host,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{errorMsg,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.success.bean.TaskLogs">
+    update task_logs
+    <set>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="execTime != null">
+        exec_time = #{execTime,jdbcType=BIGINT},
+      </if>
+      <if test="host != null">
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        error_msg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
