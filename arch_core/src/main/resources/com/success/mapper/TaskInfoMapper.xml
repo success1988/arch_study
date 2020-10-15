@@ -129,4 +129,20 @@
     </set>
     where code = #{code,jdbcType=VARCHAR}
   </update>
+
+  <!--TaskInfo selectWithLock(Integer id)-->
+  <select id="selectWithLock" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from task_info where id = #{id,jdbcType=INTEGER} for update
+  </select>
+
+  <!--int updateStatusWithOld(Integer id ,Integer oldStatus ,Integer newStatus);-->
+  <update id="updateStatusWithOld">
+    update task_info set  status = #{newStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and status = #{oldStatus,jdbcType=INTEGER}
+  </update>
+
+
+
 </mapper>
